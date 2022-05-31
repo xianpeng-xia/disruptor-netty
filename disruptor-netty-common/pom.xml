@@ -3,29 +3,21 @@
   xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
-    <groupId>org.springframework.boot</groupId>
-    <artifactId>spring-boot-starter-parent</artifactId>
-    <version>2.7.0</version>
-    <relativePath/> <!-- lookup parent from repository -->
+    <groupId>com.example</groupId>
+    <artifactId>disruptor-netty</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <relativePath>../pom.xml</relativePath>
   </parent>
 
   <groupId>com.example</groupId>
-  <artifactId>disruptor-netty</artifactId>
+  <artifactId>disruptor-netty-common</artifactId>
   <version>0.0.1-SNAPSHOT</version>
-  <name>disruptor-netty</name>
-  <description>disruptor-netty</description>
-
-  <modules>
-    <module>disruptor-netty-api</module>
-    <module>disruptor-netty-common</module>
-    <module>disruptor-netty-client</module>
-    <module>disruptor-netty-server</module>
-  </modules>
+  <name>disruptor-netty-common</name>
+  <description>disruptor-netty-common</description>
 
   <properties>
     <java.version>1.8</java.version>
   </properties>
-
   <dependencies>
     <dependency>
       <groupId>org.springframework.boot</groupId>
