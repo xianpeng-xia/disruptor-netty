@@ -1,4 +1,4 @@
-package com.example.disruptornetty.common.entity.codec;
+package com.example.disruptornetty.common.codec;
 
 import io.netty.handler.codec.marshalling.DefaultMarshallerProvider;
 import io.netty.handler.codec.marshalling.DefaultUnmarshallerProvider;

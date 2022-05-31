@@ -1,7 +1,7 @@
 package com.example.disruptornetty.client;
 
 import com.example.disruptornetty.common.entity.TranslatorData;
-import com.example.disruptornetty.common.entity.codec.MarshallingCodecFactory;
+import com.example.disruptornetty.common.codec.MarshallingCodecFactory;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.PooledByteBufAllocator;
 import io.netty.channel.AdaptiveRecvByteBufAllocator;
