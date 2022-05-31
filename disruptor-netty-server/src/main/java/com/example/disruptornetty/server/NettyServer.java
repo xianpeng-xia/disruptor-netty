@@ -16,14 +16,13 @@ import io.netty.handler.logging.LogLevel;
 import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "NettyServer")
 public class NettyServer {
+    EventLoopGroup bossGroup = new NioEventLoopGroup();
+    EventLoopGroup workGroup = new NioEventLoopGroup();
 
     public NettyServer() {
         //1 创建两个工作线程组
-        EventLoopGroup bossGroup = new NioEventLoopGroup();
-        EventLoopGroup workGroup = new NioEventLoopGroup();
-
         ServerBootstrap bootstrap = new ServerBootstrap();
         try {
             bootstrap.group(bossGroup, workGroup)
@@ -39,7 +38,7 @@ public class NettyServer {
                         protected void initChannel(SocketChannel sc) throws Exception {
                             sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingDecoder());
                             sc.pipeline().addLast(MarshallingCodecFactory.buildMarshallingEncoder());
-                            sc.pipeline().addLast(new ServerHanler());
+                            sc.pipeline().addLast(new ServerHandler());
                         }
                     });
 
@@ -50,10 +49,12 @@ public class NettyServer {
             sf.channel().closeFuture();
         } catch (InterruptedException e) {
             log.error("bind error", e);
-        } finally {
-            bossGroup.shutdownGracefully();
-            workGroup.shutdownGracefully();
-            log.info("Server ShutDown...");
         }
+    }
+
+    public void close() {
+        bossGroup.shutdownGracefully();
+        workGroup.shutdownGracefully();
+        log.info("Server ShutDown...");
     }
 }

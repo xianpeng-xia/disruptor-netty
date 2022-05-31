@@ -13,22 +13,25 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.logging.LogLevel;
+import io.netty.handler.logging.LoggingHandler;
 import lombok.extern.slf4j.Slf4j;
 
-@Slf4j
+@Slf4j(topic = "NettyClient")
 public class NettyClient {
     public static final String HOST = "127.0.0.1";
     public static final int PORT = 8765;
+    EventLoopGroup workGroup = new NioEventLoopGroup();
+
     // 可优化，池化 Map<String,Channel> channelMap= new ConcurrentHashMap<>();
     private Channel channel;
-
+    private ChannelFuture channelFuture;
 
     public NettyClient() {
         this.connect(HOST, PORT);
     }
 
     private void connect(String host, int port) {
-        EventLoopGroup workGroup = new NioEventLoopGroup();
         Bootstrap bootstrap = new Bootstrap();
         try {
             bootstrap.group(workGroup)
@@ -37,6 +40,7 @@ public class NettyClient {
                     .option(ChannelOption.RCVBUF_ALLOCATOR, AdaptiveRecvByteBufAllocator.DEFAULT)
                     // 缓存区 池化操作
                     .option(ChannelOption.ALLOCATOR, PooledByteBufAllocator.DEFAULT)
+                    .handler(new LoggingHandler(LogLevel.INFO))
                     .handler(new ChannelInitializer<SocketChannel>() {
                         @Override
                         protected void initChannel(SocketChannel sc) throws Exception {
@@ -46,17 +50,13 @@ public class NettyClient {
                         }
                     });
 
-            ChannelFuture channelFuture = bootstrap.connect(host, port);
+            channelFuture = bootstrap.connect(host, port).sync();
             log.info("Client connected...");
 
             this.channel = channelFuture.channel();
-            channelFuture.channel().closeFuture().sync();
 
         } catch (Exception e) {
             log.error("connect error:", e);
-        } finally {
-            workGroup.shutdownGracefully();
-            log.info("Client ShutDown...");
         }
     }
 
@@ -69,5 +69,11 @@ public class NettyClient {
 
             this.channel.writeAndFlush(data);
         }
+    }
+
+    public void close() throws InterruptedException {
+        channelFuture.channel().closeFuture().sync();
+        workGroup.shutdownGracefully();
+        log.info("Client ShutDown...");
     }
 }
