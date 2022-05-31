@@ -13,6 +13,7 @@
   <artifactId>disruptor-netty</artifactId>
   <version>0.0.1-SNAPSHOT</version>
   <name>disruptor-netty</name>
+  <packaging>pom</packaging>
   <description>disruptor-netty</description>
 
   <modules>

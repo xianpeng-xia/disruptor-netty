@@ -1,10 +1,10 @@
-package com.example.disruptornetty.server;
+package com.example.disruptornetty.client;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DisruptorNettyServerApplicationTests {
+class NettyClientApplicationTests {
 
     @Test
     void contextLoads() {

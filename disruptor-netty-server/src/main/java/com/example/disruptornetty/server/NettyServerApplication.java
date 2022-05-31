@@ -1,13 +1,13 @@
-package com.example.disruptornetty.client;
+package com.example.disruptornetty.server;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class DisruptorNettyClientApplication {
+public class NettyServerApplication {
 
     public static void main(String[] args) {
-        SpringApplication.run(DisruptorNettyClientApplication.class, args);
+        SpringApplication.run(NettyServerApplication.class, args);
     }
 
 }
