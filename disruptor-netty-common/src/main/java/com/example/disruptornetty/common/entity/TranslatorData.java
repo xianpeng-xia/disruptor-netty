@@ -8,7 +8,7 @@ import lombok.experimental.Accessors;
 @Data
 @Accessors(chain = true)
 public class TranslatorData implements Serializable {
-    private static final long serialVersionUid = 1L;
+    private static final long serialVersionUID = 1L;
 
     private String id;
     private String name;
