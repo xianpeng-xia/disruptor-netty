@@ -35,6 +35,12 @@
       <version>4.1.68.Final</version>
     </dependency>
 
+    <!-- https://mvnrepository.com/artifact/com.lmax/disruptor -->
+    <dependency>
+      <groupId>com.lmax</groupId>
+      <artifactId>disruptor</artifactId>
+      <version>3.4.2</version>
+    </dependency>
 
     <!--marshalling start 2.0.12.Final -->
     <!-- https://mvnrepository.com/artifact/org.jboss.marshalling/jboss-marshalling -->
