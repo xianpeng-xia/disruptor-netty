@@ -17,7 +17,6 @@
   <description>disruptor-netty</description>
 
   <modules>
-    <module>disruptor-netty-api</module>
     <module>disruptor-netty-common</module>
     <module>disruptor-netty-client</module>
     <module>disruptor-netty-server</module>
